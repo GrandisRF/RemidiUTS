@@ -1,6 +1,7 @@
 package xir4n17.remidiuts.telkomschid.remidiuts;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class SwipeActivity extends AppCompatActivity {
+public class TabsActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -34,7 +35,7 @@ public class SwipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_swipe);
+        setContentView(R.layout.activity_tabs);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,6 +47,9 @@ public class SwipeActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -53,7 +57,7 @@ public class SwipeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_swipe, menu);
+        getMenuInflater().inflate(R.menu.menu_tabs, menu);
         return true;
     }
 
@@ -103,7 +107,7 @@ public class SwipeActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_swipe, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
@@ -129,7 +133,7 @@ public class SwipeActivity extends AppCompatActivity {
             else if (position == 1)
                 return new DataFragment();
             else
-                return PlaceholderFragment.newInstance(position + 1);
+                return SwipeActivity.PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
