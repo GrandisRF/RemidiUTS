@@ -73,6 +73,7 @@ public class DrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         changePage(id);
+
         return true;
     }
 
